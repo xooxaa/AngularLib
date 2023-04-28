@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import data from '../assets/data.json';
+import { Component, OnInit } from "@angular/core";
+import { GetJsonService } from "./get-json.service";
 
 export interface ExampleTab {
   label: string;
@@ -7,28 +7,37 @@ export interface ExampleTab {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  angularCliCards = data.angularCliCards;
-  databindingCards = data.databindingCards;
-  directivesCards = data.directivesCards;
-  lifecycleCards = data.lifecycleCards;
-  decoratorsCards = data.decoratorsCards;
-  pipesCards = data.decoratorsCards;
-  routingCards = data.routingCards;
-  materialCards = data.materialCards;
+  tabs: any;
 
-  tabs = [
-    { title: 'Angular CLI', cards: this.angularCliCards },
-    { title: 'Databinding', cards: this.databindingCards },
-    { title: 'Directives', cards: this.directivesCards },
-    { title: 'Lifecycle', cards: this.lifecycleCards },
-    { title: 'Decorators', cards: this.decoratorsCards },
-    { title: 'Pipes', cards: this.pipesCards },
-    { title: 'Routing', cards: this.routingCards },
-    { title: 'Matrial', cards: this.materialCards },
-  ];
+  constructor(private getJsonService: GetJsonService) {}
+
+  ngOnInit() {
+    this.getJsonService.getData().subscribe((data: any) => {
+      const angularCliCards = data.angularCliCards;
+      const databindingCards = data.databindingCards;
+      const directivesCards = data.directivesCards;
+      const lifecycleCards = data.lifecycleCards;
+      const decoratorsCards = data.decoratorsCards;
+      const pipesCards = data.decoratorsCards;
+      const routingCards = data.routingCards;
+      const materialCards = data.materialCards;
+
+      this.tabs = [
+        { title: "Angular CLI", cards: angularCliCards },
+        { title: "Databinding", cards: databindingCards },
+        { title: "Directives", cards: directivesCards },
+        { title: "Lifecycle", cards: lifecycleCards },
+        { title: "Decorators", cards: decoratorsCards },
+        { title: "Pipes", cards: pipesCards },
+        { title: "Routing", cards: routingCards },
+        { title: "Matrial", cards: materialCards },
+      ];
+    });
+  }
+  // https://raw.githubusercontent.com/xooxaa/AngularLib/main/src/assets/data.json
 }
