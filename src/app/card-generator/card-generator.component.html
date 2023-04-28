@@ -1,0 +1,186 @@
+<mat-card class="card-container">
+  <mat-card-header class="distance-bottom">
+    <mat-card-title> Card-Generator </mat-card-title>
+    <mat-card-subtitle>Helps you to generate a new card</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="distance-top distance-bottom">
+    <mat-form-field class="example-full-width">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter Card Subtitle"
+        [value]="card.title"
+        (input)="onTitleInput($any($event).target.value)"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width">
+      <mat-label>Subtitle</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter Card Subtitle"
+        [value]="card.subtitle"
+        (input)="onSubtitleInput($any($event).target.value)"
+      />
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <br />
+
+    <ng-container *ngFor="let line of card.code; let i = index">
+      <h2>
+        Code Line {{ i + 1 }}
+        <button
+          mat-raised-button
+          color="primary"
+          class="distance-left"
+          (click)="onNewElementClick(i)"
+        >
+          Add Element
+        </button>
+        <button
+          *ngIf="i != 0"
+          mat-raised-button
+          color="warn"
+          class="distance-left"
+          (click)="onRemoveLineClick(i)"
+        >
+          Remove Line
+        </button>
+      </h2>
+
+      <div *ngFor="let elemtent of line; let j = index">
+        <mat-form-field class="example-half-width">
+          <mat-label>Element {{ j + 1 }} </mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Enter Element Text"
+            [value]="elemtent.text"
+            (input)="onElementInput($any($event).target.value, i, j)"
+          />
+        </mat-form-field>
+        <button
+          *ngIf="line.length > 1"
+          mat-raised-button
+          color="warn"
+          class="distance-left fill-space"
+          (click)="onRemoveElementClick(i, j)"
+        >
+          Delete
+        </button>
+        <br />
+        <mat-radio-group aria-label="Select an option" value="1">
+          <mat-radio-button
+            value="1"
+            [checked]="elemtent.style === '' ? '' : null"
+            (change)="onRadioChange('', i, j)"
+            >Grey</mat-radio-button
+          >
+          <mat-radio-button
+            value="2"
+            [checked]="elemtent.style === 'codecolor-lightblue' ? '' : null"
+            (change)="onRadioChange('codecolor-lightblue', i, j)"
+            >Blue</mat-radio-button
+          >
+          <mat-radio-button
+            value="3"
+            [checked]="elemtent.style === 'codecolor-yellow' ? '' : null"
+            (change)="onRadioChange('codecolor-yellow', i, j)"
+            >Yellow</mat-radio-button
+          >
+          <mat-radio-button
+            value="4"
+            [checked]="elemtent.style === 'codecolor-orange' ? '' : null"
+            (change)="onRadioChange('codecolor-orange', i, j)"
+            >Orange</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+      <br />
+    </ng-container>
+
+    <button mat-raised-button color="primary" (click)="onNewLineClick()">
+      New Code Line
+    </button>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="distance-top distance-bottom">
+    <h2>
+      Start New
+      <button
+        mat-raised-button
+        color="primary"
+        class="distance-left"
+        (click)="onNewCardClick()"
+      >
+        Clear Card
+      </button>
+    </h2>
+
+    <h2>
+      Import from JSON String
+      <button
+        mat-raised-button
+        color="primary"
+        class="distance-left"
+        (click)="onImportClick()"
+      >
+        Import
+      </button>
+    </h2>
+    <mat-form-field class="example-full-width">
+      <mat-label>JSON String </mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter or Paste JSON String"
+        [value]="JSONstring"
+        (input)="onJSONstringInput($any($event).target.value)"
+      />
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="distance-top distance-bottom">
+    <h2>Card Preview</h2>
+    <app-card>
+      <ng-container cardTitle>{{ card.title }}</ng-container>
+      <ng-container cardSubtitle>{{ card.subtitle }}</ng-container>
+      <ng-container cardContent *ngFor="let line of card.code">
+        <span *ngFor="let part of line" [ngClass]="part.style">
+          {{ part.text }}
+        </span>
+
+        <br *ngIf="card.code.length > 1" />
+      </ng-container>
+    </app-card>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="distance-top">
+    <h2>
+      JSON String
+      <button
+        mat-raised-button
+        color="primary"
+        class="distance-left"
+        [cdkCopyToClipboard]="getJSONString()"
+      >
+        Copy to Clipboard
+      </button>
+    </h2>
+    <br />
+
+    {{ getJSONString() }}
+  </mat-card-content>
+</mat-card>

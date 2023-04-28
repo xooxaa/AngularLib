@@ -1,0 +1,10 @@
+<app-card *ngFor="let card of cards">
+  <ng-container cardTitle>{{ card.title }}</ng-container>
+  <ng-container cardSubtitle>{{ card.subtitle }}</ng-container>
+  <ng-container cardContent *ngFor="let line of card.code">
+    <span *ngFor="let part of line" [ngClass]="part.style">
+      {{ part.text }}
+    </span>
+    <br />
+  </ng-container>
+</app-card>

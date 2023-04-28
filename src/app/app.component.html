@@ -1,0 +1,15 @@
+<div class="container alternate-theme">
+  <mat-tab-group backgroundColor="primary">
+    <mat-tab label="Home">
+      <ng-template matTabContent>
+        <app-card-generator></app-card-generator>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab *ngFor="let tab of tabs" [label]="tab.title">
+      <ng-template matTabContent>
+        <app-cards [cards]="tab.cards"> </app-cards>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

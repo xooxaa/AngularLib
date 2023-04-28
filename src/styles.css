@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "@angular/material/prebuild-themes/pink-bluegrey.css"; */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #303030;
+  color: #fff;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.card-container {
+  margin-top: 10px;
+}
+.distance-top {
+  margin-top: 20px;
+}
+.distance-bottom {
+  margin-bottom: 20px;
+}
+.distance-left {
+  margin-left: 20px;
+}
+.linebreak {
+  margin-bottom: 10px;
+}
+.codeline {
+  background-color: #023047;
+  color: #ddd;
+  padding: 5px 15px;
+  font-family: Roboto Mono, monospace;
+  font-size: 20px;
+}
+.codecolor-blue {
+  color: #219ebc;
+}
+.codecolor-lightblue {
+  color: #8ecae6;
+}
+.codecolor-orange {
+  color: #fb8500;
+}
+.codecolor-yellow {
+  color: #ffb703;
+}
